@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Random Game</string>
+    <string name="str_guess_the_number">Guess the number</string>
+    <string name="str_score">score:</string>
+    <string name="str_0">0</string>
+    <string name="str_guess">Guess</string>
+    <string name="str_message">message</string>
 </resources>

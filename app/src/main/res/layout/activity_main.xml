@@ -15,7 +15,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="34dp"
         android:layout_marginTop="41dp"
-        android:text="Guess the number"
+        android:text="@string/str_guess_the_number"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="24sp" />
 
@@ -27,7 +27,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="261dp"
         android:layout_marginTop="43dp"
-        android:text="score: "
+        android:text="@string/str_score"
         android:textSize="20sp" />
 
     <TextView
@@ -38,7 +38,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="334dp"
         android:layout_marginTop="44dp"
-        android:text="0"
+        android:text="@string/str_0"
         android:textSize="20sp" />
 
     <EditText
@@ -60,7 +60,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="268dp"
         android:layout_marginTop="107dp"
-        android:text="Guess" />
+        android:text="@string/str_guess" />
 
     <ProgressBar
         android:id="@+id/progressBarAttempt"
@@ -92,7 +92,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="34dp"
         android:layout_marginTop="270dp"
-        android:text="message"
+        android:text="@string/str_message"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="25sp" />
 
