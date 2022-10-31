@@ -4,5 +4,8 @@
     <string name="str_score">score:</string>
     <string name="str_0">0</string>
     <string name="str_guess">Guess</string>
-    <string name="str_message">message</string>
+    <string name="str_message">...</string>
+    <string name="bigger_value">The number is bigger</string>
+    <string name="smaller_value">The number is smaller</string>
+    <string name="winning_message">Congrats you won !!</string>
 </resources>

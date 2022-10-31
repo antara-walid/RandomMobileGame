@@ -3,15 +3,31 @@ package com.example.randomgame;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private Button buttonGuess;
     private EditText editTextNumber;
+    private TextView textViewScoreNumber;
     private TextView textViewMessage;
+    private ProgressBar progressBarAttempt;
+    private TextView textViewAttempt;
+    private ListView listViewAttempts;
+
+    private int secretNumber;
+    private int counter;
+    private int score;
+    private List<String> listOfAttempts = new ArrayList<>();
+    private int maxAttempts = 7;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,15 +36,57 @@ public class MainActivity extends AppCompatActivity {
 
         buttonGuess = findViewById(R.id.buttonGuess);
         editTextNumber = findViewById(R.id.editTextNumber);
+        textViewScoreNumber = findViewById(R.id.textViewScoreNumber);
         textViewMessage = findViewById(R.id.textViewMessage);
+
+        progressBarAttempt = findViewById(R.id.progressBarAttempt);
+        textViewAttempt = findViewById(R.id.textViewAttempt);
+        listViewAttempts = findViewById(R.id.listViewAttempts);
+
+        init();
+
 
         buttonGuess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
                 int number = Integer.parseInt(editTextNumber.getText().toString());
-                int result = number *2;
-                textViewMessage.setText(String.valueOf(result ) );
+
+                // check if nbr is bigger or smaller or equals secret nbr
+                if (number > secretNumber) {
+                    textViewMessage.setText(R.string.bigger_value);
+                } else if (number < secretNumber) {
+                    textViewMessage.setText(R.string.smaller_value);
+                } else {
+                    textViewMessage.setText(R.string.winning_message);
+                    score += 5;
+                    textViewScoreNumber.setText(String.valueOf(score));
+                    playAgain();
+                }
+
+                textViewAttempt.setText(String.valueOf(counter));
+                progressBarAttempt.setProgress(counter);
+                counter++;
+                if (counter == maxAttempts) {
+                    playAgain();
+                }
             }
+
         });
+    }
+
+    private void init() {
+        // generate random number between 1 and 20
+        secretNumber = 1 + (int) (Math.random() * 20);
+        Log.i("secret", String.valueOf(secretNumber));
+        counter = 1;
+        textViewAttempt.setText(String.valueOf(counter));
+        progressBarAttempt.setProgress(counter);
+        progressBarAttempt.setMax(maxAttempts);
+    }
+
+    private void playAgain() {
+        Log.i("myLogs", "play again");
     }
 }
