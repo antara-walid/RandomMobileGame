@@ -1,7 +1,9 @@
 package com.example.randomgame;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -65,9 +67,10 @@ public class MainActivity extends AppCompatActivity {
                     playAgain();
                 }
 
+                counter++;
                 textViewAttempt.setText(String.valueOf(counter));
                 progressBarAttempt.setProgress(counter);
-                counter++;
+
                 if (counter == maxAttempts) {
                     playAgain();
                 }
@@ -79,14 +82,29 @@ public class MainActivity extends AppCompatActivity {
     private void init() {
         // generate random number between 1 and 20
         secretNumber = 1 + (int) (Math.random() * 20);
-        Log.i("secret", String.valueOf(secretNumber));
-        counter = 1;
+        counter = 0;
         textViewAttempt.setText(String.valueOf(counter));
         progressBarAttempt.setProgress(counter);
         progressBarAttempt.setMax(maxAttempts);
+        textViewMessage.setText(R.string.str_message);
     }
 
     private void playAgain() {
-        Log.i("myLogs", "play again");
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle("Play Again ?");
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                init();
+            }
+        });
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Quit", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                finish();
+            }
+        });
+
+        alertDialog.show();
     }
 }
