@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private int score;
     private List<String> listOfAttempts = new ArrayList<>();
     private int maxAttempts = 7;
+    private ArrayAdapter<String> model ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +47,15 @@ public class MainActivity extends AppCompatActivity {
         textViewAttempt = findViewById(R.id.textViewAttempt);
         listViewAttempts = findViewById(R.id.listViewAttempts);
 
+
+
+        // list view
+        model = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,listOfAttempts);
+        listViewAttempts.setAdapter(model);
+        // initialisation
         init();
 
-
+        // listener for the btn
         buttonGuess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
                     textViewScoreNumber.setText(String.valueOf(score));
                     playAgain();
                 }
+                listOfAttempts.add("attempt "+counter + " -> " + number);
+                model.notifyDataSetChanged(); // to charge the changes in the list view
 
                 counter++;
                 textViewAttempt.setText(String.valueOf(counter));
@@ -87,6 +97,9 @@ public class MainActivity extends AppCompatActivity {
         progressBarAttempt.setProgress(counter);
         progressBarAttempt.setMax(maxAttempts);
         textViewMessage.setText(R.string.str_message);
+        // clear the list view
+        listOfAttempts.clear();
+        model.notifyDataSetChanged();
     }
 
     private void playAgain() {
